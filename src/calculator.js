@@ -18,11 +18,31 @@ function calculate(a, op, b) {
     case '-': return a - b;
     case '*': return a * b;
     case '/': return b !== 0 ? a / b : null;
+    case '%': return b !== 0 ? a % b : null;
+    case '^': return Math.pow(a, b);
     default: return null;
   }
 }
 
-module.exports = { calculate };
+function modulo(a, b) {
+  a = parseFloat(a);
+  b = parseFloat(b);
+  return b !== 0 ? a % b : null;
+}
+
+function power(base, exponent) {
+  base = parseFloat(base);
+  exponent = parseFloat(exponent);
+  return Math.pow(base, exponent);
+}
+
+function squareRoot(n) {
+  n = parseFloat(n);
+  if (n < 0) return null;
+  return Math.sqrt(n);
+}
+
+module.exports = { calculate, modulo, power, squareRoot };
 
 function prompt() {
   rl.question('Enter calculation (e.g. 2 + 2): ', (input) => {
