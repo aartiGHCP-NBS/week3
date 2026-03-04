@@ -1,0 +1,64 @@
+#!/usr/bin/env node
+/**
+ * Node.js CLI Calculator
+ * Supports: Addition (+), Subtraction (-), Multiplication (×), Division (÷)
+ * Functions: addition, subtraction, multiplication, division, modulo, power, squareRoot
+ */
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+function calculate(a, op, b) {
+  a = parseFloat(a);
+  b = parseFloat(b);
+  switch (op) {
+    case '+': return a + b;
+    case '-': return a - b;
+    case '*': return a * b;
+    case '/': return b !== 0 ? a / b : null;
+    case '%': return b !== 0 ? a % b : null;
+    case '^': return Math.pow(a, b);
+    default: return null;
+  }
+}
+
+function modulo(a, b) {
+  a = parseFloat(a);
+  b = parseFloat(b);
+  return b !== 0 ? a % b : null;
+}
+
+function power(base, exponent) {
+  base = parseFloat(base);
+  exponent = parseFloat(exponent);
+  return Math.pow(base, exponent);
+}
+
+function squareRoot(n) {
+  n = parseFloat(n);
+  if (n < 0) return null;
+  return Math.sqrt(n);
+}
+
+module.exports = { calculate, modulo, power, squareRoot };
+
+function prompt() {
+  rl.question('Enter calculation (e.g. 2 + 2): ', (input) => {
+    const match = input.match(/\s*([\d.]+)\s*([+\-*/])\s*([\d.]+)\s*/);
+    if (match) {
+      const [, a, op, b] = match;
+      const result = calculate(a, op, b);
+      console.log('Result:', result);
+    } else {
+      console.log('Invalid input. Format: number operator number');
+    }
+    prompt();
+  });
+}
+
+console.log('Node.js CLI Calculator');
+console.log('Supported operations: + (add), - (subtract), * (multiply), / (divide)');
+prompt();
