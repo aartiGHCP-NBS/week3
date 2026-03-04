@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { calculate } = require('../calculator');
+const { calculate, modulo, power, squareRoot } = require('../calculator');
 
 describe('Calculator', () => {
   describe('Addition', () => {
@@ -37,9 +37,38 @@ describe('Calculator', () => {
     });
   });
 
+  describe('Modulo', () => {
+    it('should return remainder of division', () => {
+      expect(modulo(5, 2)).to.equal(1);
+      expect(modulo(10, 3)).to.equal(1);
+      expect(modulo(10, 0)).to.equal(null);
+    });
+  });
+
+  describe('Exponentiation', () => {
+    it('should return base raised to exponent', () => {
+      expect(power(2, 3)).to.equal(8);
+      expect(power(5, 0)).to.equal(1);
+      expect(power(2, -2)).to.equal(0.25);
+    });
+    it('should return base raised to exponent using calculate', () => {
+      expect(calculate(2, '^', 3)).to.equal(8);
+    });
+  });
+
+  describe('Square Root', () => {
+    it('should return square root of positive number', () => {
+      expect(squareRoot(16)).to.equal(4);
+      expect(squareRoot(0)).to.equal(0);
+    });
+    it('should return null for negative input', () => {
+      expect(squareRoot(-9)).to.equal(null);
+    });
+  });
+
   describe('Unsupported operations', () => {
     it('should return null for unsupported operations', () => {
-      expect(calculate(2, '^', 3)).to.equal(null);
+      expect(calculate(2, '@', 3)).to.equal(null);
     });
   });
 });

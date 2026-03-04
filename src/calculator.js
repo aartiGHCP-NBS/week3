@@ -2,6 +2,7 @@
 /**
  * Node.js CLI Calculator
  * Supports: Addition (+), Subtraction (-), Multiplication (×), Division (÷)
+ * Functions: addition, subtraction, multiplication, division, modulo, power, squareRoot
  */
 const readline = require('readline');
 
