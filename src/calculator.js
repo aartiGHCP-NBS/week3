@@ -17,10 +17,12 @@ function calculate(a, op, b) {
     case '+': return a + b;
     case '-': return a - b;
     case '*': return a * b;
-    case '/': return b !== 0 ? a / b : 'Error: Division by zero';
-    default: return 'Error: Unsupported operation';
+    case '/': return b !== 0 ? a / b : null;
+    default: return null;
   }
 }
+
+module.exports = { calculate };
 
 function prompt() {
   rl.question('Enter calculation (e.g. 2 + 2): ', (input) => {
